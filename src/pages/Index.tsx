@@ -29,7 +29,7 @@ export default function Index() {
 
   const currentUser = {
     id: 1,
-    username: 'CryptoPlayer',
+    username: '@krovolok',
     photoUrl: undefined,
     balance: balance,
     rank: 1,
@@ -41,7 +41,7 @@ export default function Index() {
   const leaderboardPlayers: Player[] = [
     {
       id: 1,
-      username: 'CryptoPlayer',
+      username: '@krovolok',
       photoUrl: undefined,
       totalWinnings: currentUser.totalWinnings,
       spinsCount: history.length,
