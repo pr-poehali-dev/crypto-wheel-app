@@ -3,8 +3,9 @@ import { toast } from 'sonner';
 import FortuneWheel from '@/components/FortuneWheel';
 import ProfileHeader from '@/components/ProfileHeader';
 import Navigation from '@/components/Navigation';
-import Leaderboard from '@/components/Leaderboard';
-import SpinHistory from '@/components/SpinHistory';
+import StatsView from '@/components/StatsView';
+import InventoryView from '@/components/InventoryView';
+import ShopView from '@/components/ShopView';
 import UserProfile from '@/components/UserProfile';
 
 interface SpinRecord {
@@ -23,7 +24,7 @@ interface Player {
 }
 
 export default function Index() {
-  const [activeTab, setActiveTab] = useState<'wheel' | 'rating' | 'history' | 'profile'>('wheel');
+  const [activeTab, setActiveTab] = useState<'wheel' | 'stats' | 'inventory' | 'shop' | 'profile'>('wheel');
   const [balance, setBalance] = useState(5.0);
   const [history, setHistory] = useState<SpinRecord[]>([]);
 
@@ -118,11 +119,18 @@ export default function Index() {
             <FortuneWheel onSpin={handleSpin} balance={balance} />
           )}
 
-          {activeTab === 'rating' && (
-            <Leaderboard players={leaderboardPlayers} currentUserId={currentUser.id} />
+          {activeTab === 'stats' && (
+            <StatsView
+              totalSpins={currentUser.totalSpins}
+              totalWinnings={currentUser.totalWinnings}
+              winRate={currentUser.totalSpins > 0 ? parseFloat(((currentUser.totalWinnings / (currentUser.totalSpins * 0.1)) * 100).toFixed(1)) : 0}
+              balance={balance}
+            />
           )}
 
-          {activeTab === 'history' && <SpinHistory history={history} />}
+          {activeTab === 'inventory' && <InventoryView />}
+
+          {activeTab === 'shop' && <ShopView />}
 
           {activeTab === 'profile' && (
             <UserProfile

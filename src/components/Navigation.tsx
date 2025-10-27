@@ -2,16 +2,16 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
 interface NavigationProps {
-  activeTab: 'wheel' | 'rating' | 'history' | 'profile';
-  onTabChange: (tab: 'wheel' | 'rating' | 'history' | 'profile') => void;
+  activeTab: 'wheel' | 'stats' | 'inventory' | 'shop' | 'profile';
+  onTabChange: (tab: 'wheel' | 'stats' | 'inventory' | 'shop' | 'profile') => void;
 }
 
 export default function Navigation({ activeTab, onTabChange }: NavigationProps) {
   const tabs = [
     { id: 'wheel' as const, icon: 'Swords', label: 'PvP' },
-    { id: 'rating' as const, icon: 'User', label: 'Solo' },
-    { id: 'history' as const, icon: 'Package', label: 'Inventory' },
-    { id: 'profile' as const, icon: 'Store', label: 'Shop' },
+    { id: 'stats' as const, icon: 'Target', label: 'Solo' },
+    { id: 'inventory' as const, icon: 'Package', label: 'Inventory' },
+    { id: 'shop' as const, icon: 'Store', label: 'Shop' },
   ];
 
   return (
