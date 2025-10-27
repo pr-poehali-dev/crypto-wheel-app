@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 
 interface ProfileHeaderProps {
@@ -7,43 +6,60 @@ interface ProfileHeaderProps {
   photoUrl?: string;
   balance: number;
   rank: number;
+  lastGame?: { user: string; amount: string; chance: string };
+  topGame?: { user: string; amount: string; chance: string };
 }
 
-export default function ProfileHeader({ username, photoUrl, balance, rank }: ProfileHeaderProps) {
+export default function ProfileHeader({ username, photoUrl, balance, rank, lastGame, topGame }: ProfileHeaderProps) {
   return (
-    <Card className="bg-gradient-to-br from-card via-card to-primary/10 border-primary/30 backdrop-blur-sm">
-      <div className="p-6 flex items-center gap-4">
-        <div className="relative">
-          <Avatar className="h-20 w-20 border-4 border-primary shadow-xl">
-            <AvatarImage src={photoUrl} alt={username} />
-            <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-white text-2xl font-bold">
-              {username.charAt(0).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-          <div className="absolute -bottom-1 -right-1 bg-gold text-background rounded-full w-8 h-8 flex items-center justify-center font-bold text-xs shadow-lg">
-            #{rank}
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        <div className="bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-primary/20 rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <Icon name="History" size={16} className="text-muted-foreground" />
+            <span className="text-xs text-muted-foreground uppercase tracking-wide">Last Game</span>
           </div>
+          <div className="flex items-center gap-2 mb-1">
+            <Avatar className="h-6 w-6 border border-primary/30">
+              <AvatarFallback className="bg-primary/20 text-xs">T</AvatarFallback>
+            </Avatar>
+            <span className="text-sm font-medium text-foreground">{lastGame?.user || '@Timers'}</span>
+          </div>
+          <div className="flex items-baseline gap-1">
+            <span className="text-lg font-bold text-green-400">+231 TON</span>
+          </div>
+          <div className="text-xs text-muted-foreground mt-1">CHANCE {lastGame?.chance || '93%'}</div>
         </div>
 
-        <div className="flex-1">
-          <h2 className="text-2xl font-bold text-foreground mb-1 flex items-center gap-2">
-            {username}
-            <Icon name="CheckCircle" size={20} className="text-primary" />
-          </h2>
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Icon name="Coins" size={16} />
-            <span className="text-sm">Telegram Player</span>
+        <div className="bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-primary/20 rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <Icon name="Trophy" size={16} className="text-muted-foreground" />
+            <span className="text-xs text-muted-foreground uppercase tracking-wide">Top Game</span>
           </div>
-        </div>
-
-        <div className="text-right">
-          <div className="text-sm text-muted-foreground mb-1">Баланс</div>
-          <div className="text-3xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-            {balance.toFixed(2)}
+          <div className="flex items-center gap-2 mb-1">
+            <Avatar className="h-6 w-6 border border-primary/30">
+              <AvatarFallback className="bg-primary/20 text-xs">G</AvatarFallback>
+            </Avatar>
+            <span className="text-sm font-medium text-foreground">{topGame?.user || '@giftgambler_a...'}</span>
           </div>
-          <div className="text-sm font-semibold text-secondary">TON</div>
+          <div className="flex items-baseline gap-1">
+            <span className="text-lg font-bold text-yellow-400">+48603 TON</span>
+          </div>
+          <div className="text-xs text-muted-foreground mt-1">CHANCE {topGame?.chance || '82%'}</div>
         </div>
       </div>
-    </Card>
+
+      <div className="bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-primary/20 rounded-xl p-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-medium text-muted-foreground">3 GIFTS</span>
+          </div>
+          <div className="flex items-baseline gap-1">
+            <span className="text-2xl font-bold text-primary">8.34</span>
+            <span className="text-sm font-semibold text-muted-foreground">TON</span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -8,32 +8,40 @@ interface NavigationProps {
 
 export default function Navigation({ activeTab, onTabChange }: NavigationProps) {
   const tabs = [
-    { id: 'wheel' as const, icon: 'CircleDot', label: 'Колесо' },
-    { id: 'rating' as const, icon: 'Trophy', label: 'Рейтинг' },
-    { id: 'history' as const, icon: 'History', label: 'История' },
-    { id: 'profile' as const, icon: 'User', label: 'Профиль' },
+    { id: 'wheel' as const, icon: 'Swords', label: 'PvP' },
+    { id: 'rating' as const, icon: 'User', label: 'Solo' },
+    { id: 'history' as const, icon: 'Package', label: 'Inventory' },
+    { id: 'profile' as const, icon: 'Store', label: 'Shop' },
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-card/80 backdrop-blur-lg border-t border-primary/20 z-50">
-      <div className="max-w-2xl mx-auto px-4 py-3">
-        <div className="grid grid-cols-4 gap-2">
+    <div className="fixed bottom-0 left-0 right-0 bg-black/60 backdrop-blur-xl border-t border-white/10 z-50">
+      <div className="max-w-2xl mx-auto px-6 py-4">
+        <div className="flex justify-around items-center">
           {tabs.map((tab) => (
             <Button
               key={tab.id}
-              variant={activeTab === tab.id ? 'default' : 'ghost'}
+              variant="ghost"
               onClick={() => onTabChange(tab.id)}
-              className={`flex flex-col items-center gap-1 h-auto py-2 transition-all ${
+              className={`flex flex-col items-center gap-1.5 h-auto py-2 px-6 transition-all rounded-xl ${
                 activeTab === tab.id
-                  ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg scale-105'
-                  : 'text-muted-foreground hover:text-foreground'
+                  ? 'text-white bg-white/10'
+                  : 'text-white/60 hover:text-white hover:bg-white/5'
               }`}
             >
-              <Icon name={tab.icon} size={24} />
+              <Icon name={tab.icon} size={22} />
               <span className="text-xs font-medium">{tab.label}</span>
             </Button>
           ))}
         </div>
+      </div>
+      <div className="absolute left-1/2 -translate-x-1/2 -top-4">
+        <Button
+          onClick={() => onTabChange('profile')}
+          className="rounded-full w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 shadow-lg shadow-purple-500/50 border-4 border-black"
+        >
+          <Icon name="User" size={24} />
+        </Button>
       </div>
     </div>
   );

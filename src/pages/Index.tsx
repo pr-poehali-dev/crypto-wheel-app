@@ -102,8 +102,10 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-2xl mx-auto p-4">
+    <div className="min-h-screen bg-gradient-to-b from-background via-background to-background/95 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,123,200,0.1),transparent_50%)]" />
+      
+      <div className="max-w-2xl mx-auto p-4 relative z-10">
         <ProfileHeader
           username={currentUser.username}
           photoUrl={currentUser.photoUrl}
@@ -111,7 +113,7 @@ export default function Index() {
           rank={currentUser.rank}
         />
 
-        <div className="mt-6">
+        <div className="mt-4">
           {activeTab === 'wheel' && (
             <FortuneWheel onSpin={handleSpin} balance={balance} />
           )}
