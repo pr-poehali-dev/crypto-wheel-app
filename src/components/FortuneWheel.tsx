@@ -49,7 +49,7 @@ export default function FortuneWheel({ onSpin, balance }: FortuneWheelProps) {
 
         <div className="relative w-80 h-80">
           <div
-            className="w-full h-full rounded-full border-8 border-gold shadow-2xl transition-transform duration-[4000ms] ease-out"
+            className="w-full h-full rounded-full border-8 border-gold shadow-2xl transition-transform duration-[4000ms] ease-out bg-[#000000]"
             style={{
               transform: `rotate(${rotation}deg)`,
               background: `conic-gradient(${prizes.map((prize, i) => {
